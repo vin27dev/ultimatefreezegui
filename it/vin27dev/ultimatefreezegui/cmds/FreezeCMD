@@ -1,0 +1,90 @@
+/*
+ * This file is part of UltimateFreezeGUI, licensed under the MIT License.
+ *
+ *  Copyright (c) vin27dev (Luck) <vin27dev@gmail.com>
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+package it.vin27dev.ultimatefreezegui.cmds;
+
+import it.vin27dev.ultimatefreezegui.UltimateFreezeGUI;
+import it.vin27dev.ultimatefreezegui.utility.ChatUtility;
+import it.vin27dev.ultimatefreezegui.utility.GUI;
+import it.vin27dev.ultimatefreezegui.utility.LocationUtility;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class FreezeCMD implements CommandExecutor {
+
+    private UltimateFreezeGUI ultimateFreezeGUI;
+
+    public FreezeCMD(UltimateFreezeGUI ultimateFreezeGUI) {
+        this.ultimateFreezeGUI = ultimateFreezeGUI;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+        if(cmd.getName().equalsIgnoreCase("freeze")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if(player.hasPermission("ultimatefreezegui.freeze")) {
+                    if (args.length == 1) {
+                        Player target = Bukkit.getPlayer(args[0]);
+                        if (target != null) {
+                            if (player != target) {
+                                if (!ultimateFreezeGUI.frozen.contains(target.getUniqueId())) {
+                                    ultimateFreezeGUI.frozen.add(target.getUniqueId());
+
+                                    player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.message").replace("{target}", target.getName())));
+                                    player.sendTitle(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.title").replace("{target}", target.getName())), ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.sub-title").replace("{target}", target.getName())), 8, 35, 8);
+
+                                    target.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.target-message")));
+
+                                    target.teleport(LocationUtility.getLocation(target));
+
+                                    GUI gui = new GUI(ultimateFreezeGUI);
+                                    gui.setupInventory(target);
+                                } else {
+                                    player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.already-frozen").replace("{target}", target.getName())));
+                                }
+                            } else {
+                                player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.cant-yourself")));
+                            }
+                        } else {
+                            player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("General.not-online")));
+                        }
+                    } else {
+                        player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("Freeze.correct-use")));
+                    }
+                } else {
+                    player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("General.no-perm")));
+                }
+            } else {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("General.only-players")));
+            }
+        }
+        return false;
+    }
+}
