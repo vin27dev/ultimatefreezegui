@@ -1,0 +1,12 @@
+name: UltimateFreezeGUI
+author: vin27dev
+main: it.vin27dev.ultimatefreezegui.UltimateFreezeGUI
+version: 1.0.0
+commands:
+  freeze:
+    description: Freeze players!
+  unfreeze:
+    description: Unfreeze players!
+  ultimatefreezegui:
+    description: UltimateFreezeGUI plugin's main command!
+    aliases: [ufg, uf, ultimatefreeze]
