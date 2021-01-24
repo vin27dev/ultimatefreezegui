@@ -1,0 +1,153 @@
+#  This file is part of UltimateFreezeGUI, licensed under the MIT License.
+#
+#  Copyright (c) vin27dev (Luck) <vin27dev@gmail.com>
+#  Copyright (c) contributors
+
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+
+# {target} > Returns target's name :)
+
+# In this category you can set
+# general plugin messages!
+General:
+# Set the player is not online's message!
+  not-online: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7This player is not &bonline&7!"
+
+# Set the no permission's message!
+  no-perm: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You don't have &bpermission&7!"
+
+# Set the only players can execute commands!
+  only-players: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7Only players can execute this &bcommand&7!"
+
+# Set the command exectued by console on player quit or admit!
+  admit-or-leave-command: "tempban {target} 7d &9Cheating!"
+
+# Set the help command's list messages
+  help:
+    - " &7&l» &b/ultimatefreezegui &b- &7Returns &bhelp &7message &b:)&7!"
+    - " &7&l» &b/freeze <player> &b- &7Freeze a &bplayer &7with this &bcommand&7!"
+    - " &7&l» &b/unfreeze <player> &b- &7Unfreeze a &bplayer with this &bcommand&7!"
+    - " &7&l» &b/ultimatefreezegui reload &b- &7Reload &bconfiguration&7!"
+    - ""
+
+# Set the reload configuration's command!
+  reload-message: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7Configuration &breloaded&7!"
+
+# Here you can set the GUI as you see fit.
+# You can find all the information you need!
+GUI:
+# This is for the inventory name!
+  inv-name: "&b&lFROZEN&7&l!"
+
+# This is for inventory size, please use multiples of 9!
+  inv-size: 9
+
+# This is for the contact-item's name!
+  contact-item-name: "&b&lCONTACT &7&lUS!"
+
+# You can choose the material for the contact-item!
+  contact-item-material: NETHER_STAR
+
+# This is the lore for the contact-item!
+  contact-item-lore:
+    - "&7Join our &bdiscord &7server if you &bwant"
+    - "&7to &bcomplain &7the fact &bthat &7you're not a &bcheater&7!"
+    - ""
+    - "&b<discord-link>"
+
+# Set the slot for the contact item!
+  contact-item-slot: 0
+
+# This is for the second contact-item's name!
+  contact-item-name2: "&b&lCONTACT &7&lUS!"
+
+# You can choose the material for the second contact-item!
+  contact-item-material2: NETHER_STAR
+
+# This is the lore for the second contact-item!
+  contact-item-lore2:
+    - "&7Join our &bdiscord &7server if you &bwant"
+    - "&7to &bcomplain &7the fact &bthat &7you're not a &bcheater&7!"
+    - ""
+    - "&b<discord-link>"
+
+# Set the slot for the contact item!
+  contact-item-slot2: 8
+
+# This is for the admit-item's name!
+  admit-item-name: "&b&lADMIT"
+
+# You can choose the material for the admit-item!
+  admit-item-material: PAPER
+
+# This is the lore for the admit-item!
+  admit-item-lore:
+    - "&7Click &bhere &7if you admit you're &bcheating&7!"
+    - "&7You &bwill &7be banned for a &bperiod&7!"
+
+# Set the slot for the admit item!
+  admit-item-slot: 4
+
+# In this category you can set
+# the freeze's command messages!
+Freeze:
+# Set the message that will be sent to the staffer!
+  message: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You have frozen &b{target}&7!"
+
+# Set the title and sub-title that will be sent to the staffer!
+  title: "&7(&b&l!&7) &b&lFREEZE &7(&b&l!&7)"
+  sub-title: "&7You have frozen: &b{target}&7!"
+
+# Set the message that will be sent to the target!
+  target-message: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You've been &bfrozen&7!"
+
+# Set the already frozen's message!
+  already-frozen: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &b{target} &7is already &bfrozen&7!"
+
+# Set the can't freeze yourself's message!
+  cant-yourself: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You can't freeze &byourself&7!"
+
+# Set the command's correct use message!
+  correct-use: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7Please use: &b/freeze <player>&7!"
+
+# In this category you can set
+# the unfreeze's command messages!
+Unfreeze:
+  # Set the message that will be sent to the staffer!
+  message: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You have unfrozen &b{target}&7!"
+
+  # Set the title and sub-title that will be sent to the staffer!
+  title: "&7(&b&l!&7) &b&lUNFREEZE &7(&b&l!&7)"
+  sub-title: "&7You have unfrozen: &b{target}&7!"
+
+  # Set the message that will be sent to the target!
+  target-message: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You've been &bunfrozen&7!"
+
+  # Set the title and sub-title that will be sent to the target!
+  target-title: "&7(&b&l!&7) &b&lUNFREEZE &7(&b&l!&7)"
+  target-sub-title: "&7You have been &bunfrozen&7!"
+
+  # Set the already frozen's message!
+  not-frozen: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &b{target} &7is not &bfrozen&7!"
+
+  # Set the can't freeze yourself's message!
+  cant-yourself: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7You can't unfreeze &byourself&7!"
+
+  # Set the command's correct use message!
+  correct-use: "&b&lUltimate&7&lFreeze&b&lGUI &b&l» &7Please use: &b/freeze <player>&7!"
