@@ -1,0 +1,97 @@
+/*
+ * This file is part of UltimateFreezeGUI, licensed under the MIT License.
+ *
+ *  Copyright (c) vin27dev (Luck) <vin27dev@gmail.com>
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+package it.vin27dev.ultimatefreezegui.cmds;
+
+import it.vin27dev.ultimatefreezegui.UltimateFreezeGUI;
+import it.vin27dev.ultimatefreezegui.utility.ChatUtility;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class UltimateFreezeGUICMD implements CommandExecutor {
+
+    private UltimateFreezeGUI ultimateFreezeGUI;
+
+    public UltimateFreezeGUICMD(UltimateFreezeGUI ultimateFreezeGUI) {
+        this.ultimateFreezeGUI = ultimateFreezeGUI;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("ultimatefreezegui")) {
+            if (sender instanceof Player || sender instanceof ConsoleCommandSender) {
+                Player player = (Player) sender;
+                List<String> helpList = ultimateFreezeGUI.getConfig().getStringList("General.help");
+                if(args.length == 0) {
+                    player.sendMessage("");
+                    player.sendMessage(ChatUtility.color(" &b&l» &b&lUltimate&7&lFreeze&b&lGUI &7Developed by &bvin27dev&7!"));
+                    player.sendMessage("");
+
+                    for (int i = 0; i < helpList.size(); i++) {
+                        helpList.set(i, ChatColor.translateAlternateColorCodes('&', helpList.get(i)));
+                    }
+
+                    for(String string : helpList) {
+                        player.sendMessage(string);
+                    }
+                } else if(args.length == 1) {
+                    if(args[0].equalsIgnoreCase("reload")) {
+                        ultimateFreezeGUI.reloadConfig();
+                        player.sendMessage(ChatUtility.color(ultimateFreezeGUI.getConfig().getString("General.reload-message")));
+                    } else {
+                        player.sendMessage("");
+                        player.sendMessage(ChatUtility.color(" &b&l» &b&lUltimate&7&lFreeze&b&lGUI &7Developed by &bvin27dev&7!"));
+                        player.sendMessage("");
+                        for (int i = 0; i < helpList.size(); i++) {
+                            helpList.set(i, ChatColor.translateAlternateColorCodes('&', helpList.get(i)));
+                        }
+
+                        for(String string : helpList) {
+                            player.sendMessage(string);
+                        }
+                    }
+                } else {
+                    player.sendMessage("");
+                    player.sendMessage(ChatUtility.color(" &b&l» &b&lUltimate&7&lFreeze&b&lGUI &7Developed by &bvin27dev&7!"));
+                    player.sendMessage("");
+                    for (int i = 0; i < helpList.size(); i++) {
+                        helpList.set(i, ChatColor.translateAlternateColorCodes('&', helpList.get(i)));
+                    }
+
+                    for(String string : helpList) {
+                        player.sendMessage(string);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
