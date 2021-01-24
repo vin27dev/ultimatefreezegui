@@ -1,0 +1,53 @@
+/*
+ * This file is part of UltimateFreezeGUI, licensed under the MIT License.
+ *
+ *  Copyright (c) vin27dev (Luck) <vin27dev@gmail.com>
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+
+package it.vin27dev.ultimatefreezegui.utility;
+
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Player;
+
+public class LocationUtility {
+
+    public static Location getLocation(Player player){ //Public here can possibly also be private. Educate yourself about what public/private and things like static mean.
+        Location location = player.getLocation().clone();
+
+        //While loop checks if the block BELOW is not solid, and does not equal 0. If it is not solid, we add (0, -1, 0) to the location, essentially adding -1 to the Y, basically removing one. Y 55 becomes 54. We do this until we find a solid block beneath the location. Y != 0 prevents an infinite loop when there is void beneath the player, since there is no solid block to be found.
+        while (!location.getBlock().getRelative(BlockFace.DOWN).getType().isSolid() && location.getY() != 0){
+            location.add(0, -1, 0); //you could also use a Block instead of Location, change this line to the same thing as the one above. block = block.getRelative(BlockFace.DOWN).
+        }
+
+        //There was no solid block found, just return the original location of the player, could also be changed with just returning the location with Y = 0.
+        if (location.getY() == 0){
+            return player.getLocation();
+            //return location; Returns the location with Y = 0.
+        }
+
+        //This is just something I do to prevent people from glitching through blocks, should not be necessary though.
+        location.add(0, .2, 0);
+
+        return location;
+    }
+}
